@@ -7,6 +7,9 @@ output: html_document
 
 The code in this notebook is based on exercises in the book ["Statistical Analysis of Network Data with R" by Kolaczyk and Csardi](https://www.springer.com/gp/book/9781493909834). The authors provide all the [code for their book on Github](https://github.com/kolaczyk/sand).
 
+
+# 2.2.1 Undirected & Directed Graphs
+
 Terminology:
 
 - **vertices** = nodes
@@ -26,8 +29,6 @@ library(igraph)
 ```
 
 ## Create a graph
-
-
 
 ```{r create_first_graph}
 # create the graph object
@@ -87,3 +88,44 @@ V(dg_names)$name <- c("Sammy", "Mary Anne", "Tommy")
 plot(dg_names)
 ```
 
+# 2.2.2 Representations for Graphs
+
+- adjacency list
+- edge list
+- adjacency matrix
+
+## Adjacency list
+
+Example: the list of nodes and list of directly associated nodes for each of those nodes, as seen in the output for `print_all()`
+
+```{r view_adjacency_list_example}
+print_all(g)
+```
+
+
+## Edge list
+
+A 2-column list of vertex pairs that are joined by an edge.
+
+```{r view_edge_list_example}
+as_edgelist(g)
+```
+
+
+## Adjacency matrix
+
+```{r view_adjacency_matrix_example}
+as_adjacency_matrix(g)
+```
+
+## Useful functions
+
+- `graph_from_adj_list()`
+- `graph_from_edge_list()`
+- `graph_from_adjacency_matrix()`
+- `read_graph()` - for data stored in a file
+- `write_graph()` - to save graph data to a file
+
+# 2.2.3 Operations on Graphs
+
+...
