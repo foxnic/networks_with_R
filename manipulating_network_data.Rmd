@@ -1,0 +1,89 @@
+---
+title: "Manipulating Network Data"
+author: "Nic Fox"
+date: "14/05/2021"
+output: html_document
+---
+
+The code in this notebook is based on exercises in the book ["Statistical Analysis of Network Data with R" by Kolaczyk and Csardi](https://www.springer.com/gp/book/9781493909834). The authors provide all the [code for their book on Github](https://github.com/kolaczyk/sand).
+
+Terminology:
+
+- **vertices** = nodes
+- **edges** = links
+- number of vertices (nodes) is called the '**order**' of the graph
+- number of edges (links) is called the '**size**' of the graph
+- 2 graphs that have the same structure and only differ in the naing of their vertices and edges are called **isomorphic**
+
+Graphs can be **undirected** or **directed**.
+
+A popular R package for working with network data is **igraph**.
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("sand")  # created by the book authors & contains datasets used in the exercises
+library(igraph)
+```
+
+## Create a graph
+
+
+
+```{r create_first_graph}
+# create the graph object
+g <- graph_from_literal(1-2, 1-3, 2-3, 2-4, 3-5, 4-5, 4-6, 4-7, 5-6, 6-7)
+
+# view the graph object details
+g
+```
+
+## Visualise the graph
+
+
+
+```{r visualise_first_graph}
+# visualise the graph
+plot(g)
+```
+```{r view_vertex_info}
+V(g)
+```
+
+```{r view_edge_info}
+E(g)
+```
+
+```{r print_all_graph_info}
+print_all(g)
+```
+
+The **U** in the summary above indicates that the graph is **undirected**.
+
+A **directed graph** is also called a **digraph** and edges in those types of graphs are called **directed edges** or **arcs**. Sometimes there may be 2 arcs between 2 vertices, each going in the opposite direction to the other, and these are called **mutual**.
+
+```{r create_first_directed_graph}
+# create the directed graph with 3 vertices and 4 edges (2 directed and one mutual)
+dg <- graph_from_literal(1-+2, 1-+3, 2++3)
+
+# view the information for the directed graph
+dg
+```
+
+```{r visualise_first_directed_graph}
+plot(dg)
+```
+
+```{r create_digraph_with_names}
+dg_names <- graph_from_literal(Sam-+Mary, Sam-+Tom, Mary++Tom)
+print_all(dg_names)
+```
+
+```{r visualise_digraph_with_names}
+plot(dg_names)
+```
+
+```{r change_vertex_names}
+V(dg_names)$name <- c("Sammy", "Mary Anne", "Tommy")
+plot(dg_names)
+```
+
